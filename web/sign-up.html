@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Page de connexion</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div class="ba">
+    <div class="register-container">
+      <h1 class="register-header">Inscription</h1>
+      <form class="register-form">
+        <label for="username">Nom d'utilisateur</label>
+        <input type="text" id="username" name="username" placeholder="Entrez votre nom d'utilisateur">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="admin@gmail.com">
+        <label for="password">Mot de passe</label>
+        <input type="password" id="password" name="password" placeholder="Entrez votre mot de passe">
+        <label for="confirm-password">Confirmer le mot de passe</label>
+        <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirmez votre mot de passe">
+        <div class="accept-terms">
+          <input type="checkbox" id="accept-terms" name="accept-terms">
+          <label for="accept-terms">J'accepte les termes et conditions</label>
+        </div>
+        <button type="submit" class="register-button" id="sa"> S'inscrire</button>
+      </form>
+    </div>
+  </div>
+
+	<script type="module">// code JavaScript pour rediriger vers la page home lorsqu'on clique sur le bouton "Connexion"
+		import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
+		import { getDatabase, set, ref } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-database.js";
+		import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js";
+
+		const firebaseConfig = {
+			apiKey: "AIzaSyD2gIA-j9FQVYYusQ7urmLniTQw8_1UZf8",
+			authDomain: "loginform-18bc1.firebaseapp.com",
+			databaseURL: "https://loginform-18bc1-default-rtdb.firebaseio.com/",
+			projectId: "loginform-18bc1",
+			storageBucket: "loginform-18bc1.appspot.com",
+			messagingSenderId: "919815225914",
+			appId: "1:919815225914:web:508a675fe516dc2e72eb03"
+		};
+
+		// Initialize Firebase
+		const app = initializeApp(firebaseConfig);
+		const db = getDatabase(app);
+		const loginFormDB = ref(db, 'loginForm');
+		const auth = getAuth();
+
+		document.getElementById('sa').addEventListener('click',(e) => {
+			e.preventDefault();
+			var email = document.getElementById('email').value;
+			var password = document.getElementById('password').value;
+			var username = document.getElementById('username').value;
+			var confirmPassword = document.getElementById('confirm-password').value;
+			var checkbox = document.getElementById('accept-terms');
+
+			// Vérification des champs
+			if (email === '' || password === '' || username === '') {
+				alert('Veuillez remplir tous les champs.');
+				return;
+			}
+
+			if (confirmPassword !== password) {
+				alert('Les mots de passe ne correspondent pas.');
+				return;
+			}
+
+			if (!checkbox.checked) {
+				alert('Veuillez accepter les termes et les conditions.');
+				return;
+			}
+
+			// Vérification de l'adresse email
+			const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+			if (!emailRegex.test(email)) {
+				alert('Veuillez saisir une adresse email valide.');
+				return;
+			}
+
+			// Vérification du mot de passe
+			if (password.length < 6) {
+				alert('Le mot de passe doit contenir au moins 6caractères.');
+return;
+}
+		// Création de l'utilisateur
+		createUserWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    const uid = userCredential.user.uid;
+    const user = userCredential.user;
+    set(ref(db, 'users/' + user.uid),{
+      username: username,
+      email: email
+    })
+   
+    // Enregistrement des données réussi, redirection vers la page home
+    window.location.href = 'home.html';
+
+   
+     
+    }).catch((error) => {
+      // Erreur lors de l'enregistrement des données
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      alert(errorMessage);
+    });
+  
+  });
+
+
+
+</script>
+</body>
+</html>

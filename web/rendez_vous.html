@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Liste des patients</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .details-btn {
+    display: inline-block;
+    background-color: #007bff;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+  }
+  
+  .delete-btn {
+    display: inline-block;/*pour afficher un élément HTML en tant que bloc, tout en conservant le comportement en ligne de l'élément.*/
+    background-color: #2190db;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-left: 10px;
+  }
+  td img {
+  vertical-align: middle;/* l'élément est aligné verticalement au centre de la ligne dans laquelle il se trouve*/
+  width: 50px; /* ajustez la taille en fonction de vos besoins */
+  height: 50px; /* ajustez la taille en fonction de vos besoins */
+  margin-right: 10px; /* ajustez la marge en fonction de vos besoins */
+  border-radius: 50%;
+}
+.icon-rendezvous {
+  float: right;
+  margin-top: 10px;
+  margin-right: 70px;
+  width: 50px;
+  height: 50px;
+}
+
+.fenetre-contextuelle {
+  position: absolute;
+  top: 40px;
+  right: 20px;
+  padding: 30px;
+  margin:30px;
+  background-color: white;
+  border: 1px solid black;
+  display: none;
+}
+
+.fermer-fenetre {
+  position: absolute;/*Lorsqu'un élément est positionné de manière absolue, il est retiré du flux normal du document, ce qui signifie qu'il ne prend plus de place dans la disposition des autres éléments.*/
+  top: 5px;
+  right: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  color: red;
+}
+#ajouter-rendezvous {
+  color: #fff;
+  background-color: #0c08f7;
+  padding: 8px 16px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 16px;
+  margin-left: 700px;
+ 
+
+}
+
+#ajouter-rendezvous:hover {
+  background-color: #0805be;
+  color: #fff;
+}
+
+
+    </style>
+
+
+
+  </head>
+  <body>
+    <header style="background-color: #336699; margin-left:15px;position: fixed;width: 100%; color: white;"> 
+        <h2 >Rendez-vous</h2>
+        <a href="ajout_rendezvous.html" id="ajouter-rendezvous">Ajouter un rendez-vous</a>
+
+        <img class="icon-rendezvous" src="C:\Users\elbootic.com\Documents\icon_rendezvous.png" alt="Icone Rendez-vous">
+      </header>
+      
+      <div class="fenetre-contextuelle">
+        <select>
+          <option>Aujourd'hui</option>
+          <option>Hier</option>
+          <option>Semaine prochaine</option>
+        </select>
+        <span class="fermer-fenetre">X</span>
+      </div>
+    </header>
+    <div class="container">
+      <h1 style=" margin-top:200px;">Rendez-vous</h1>
+      <table>
+        <colgroup>
+            <col style="width: 33.33%;">
+            <col style="width: 33.33%;">
+            <col style="width: 33.33%;">
+          </colgroup>
+        <thead>
+          <tr>
+            <th>   Nom</th>
+            <th>Prénom</th>
+            <th>Date et Heure</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><img src="C:\Users\elbootic.com\Documents\doctor5.jpeg" alt="Nom de l'image"> Smith</td>
+
+            <td>John</td>
+            <td>
+                <a  class="details-btn">10/04/2023</a>
+                <a class="delete-btn">14h30</a>
+              </td>
+          </tr>
+          <tr>
+            <td><img src="C:\Users\elbootic.com\Documents\doctor5.jpeg" alt="Nom de l'image">Doe</td>
+            <td>Jane</td>
+            <td>
+                <a  class="details-btn">10/04/2023</a>
+                <a class="delete-btn">14h30</a>
+              </td>
+          </tr>
+          <tr>
+            <td><img src="C:\Users\elbootic.com\Documents\doctor5.jpeg" alt="Nom de l'image">Williams</td>
+            <td>Michael</td>
+            <td>
+                <a  class="details-btn">10/04/2023</a>
+                <a class="delete-btn">14h30</a>
+              </td>
+          </tr>
+          <tr>
+            <td><img src="C:\Users\elbootic.com\Documents\doctor5.jpeg" alt="Nom de l'image">Johnson</td>
+            <td>Sara</td>
+            <td>
+                <a  class="details-btn">10/04/2023</a>
+                <a class="delete-btn">14h30</a>
+              </td>
+          </tr>
+          <tr>
+            <td><img src="C:\Users\elbootic.com\Documents\doctor5.jpeg" alt="Nom de l'image">Lee</td>
+            <td>David</td>
+            <td>
+                <a  class="details-btn">10/04/2023</a>
+                <a class="delete-btn">14h30</a>
+              </td>
+          </tr>
+          <tr>
+            <td><img src="C:\Users\elbootic.com\Documents\doctor5.jpeg" alt="Nom de l'image">Chen</td>
+            <td>Lisa</td>
+            <td>
+                <a  class="details-btn">10/04/2023</a>
+                <a class="delete-btn">14h30</a>
+              </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <script>
+      var iconRendezVous = document.querySelector('.icon-rendezvous');
+    var fenetreContextuelle = document.querySelector('.fenetre-contextuelle');
+    var fermerFenetre = document.querySelector('.fermer-fenetre');
+    
+    iconRendezVous.addEventListener('click', function() {
+      fenetreContextuelle.style.display = 'block';
+    });
+    
+    fermerFenetre.addEventListener('click', function() {
+      fenetreContextuelle.style.display = 'none';
+    });
+    
+    </script>
+  </body>
+</html>
+     

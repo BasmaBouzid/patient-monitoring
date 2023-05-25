@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Page ajout ordonnance</title>
+ <style>
+
+    
+.ba {
+    background-color: #0c08f7;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .register-container {
+    background-color: #ffffff;
+    width: 50%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+  }
+  
+  .register-header {
+    font-size: 2em;
+    margin-bottom: 20px;
+  }
+  
+  .register-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    margin-bottom: 5px;
+  }
+  
+  input {
+    padding: 5px;
+    margin-bottom: 20px;
+    border: solid;
+    border-radius: 5px;
+  }
+  
+  .accept-terms {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .accept-terms label {
+    margin-left: 10px;
+  }
+  
+  .register-button {
+    background-color: #0c08f7;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    cursor: pointer;
+  }
+  
+  .register-button:hover {
+    background-color: #0805be;
+  }
+  .alert{
+    background-color: aquamarine;
+    padding:10px;
+    text-align: center;
+    font-weight: 700;
+    display: none;
+  }
+ </style>
+
+
+
+
+
+
+
+</head>
+<body>
+<div class="ba">
+  
+    <div  id="ab"   class="register-container">
+      
+      
+      <form  action="" id="myForm" class="register-form">
+        <div class="alert">la formulaire est envoyée</div>
+        <h1 class="register-header">Ajout d'Ordonnances</h1>
+        
+        <label for="username">Nom </label>
+        <input type="text" id="a" name="username" placeholder="Entrez le nom">
+
+		   <label for="username">Prenom </label>
+        <input type="text" id="b" name="username" placeholder="Entrez le prenom">
+
+
+        <label for="username">Médicament</label>
+        <input type="text" id="c" name="username" placeholder="">
+
+
+
+		   <label for="username">Usage</label>
+        <input type="text" id="d" name="username" placeholder="">
+
+
+
+		    <label for="username">Observation</label>
+        <input type="text" id="e" name="username" placeholder="">
+
+      
+        <button type="button"  class="register-button">Sauvegarder</button>
+
+      </form>
+    </div>
+  </div>
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
+    import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-database.js";
+  
+    const firebaseConfig = {
+        apiKey: "AIzaSyC0g_euVOGnQq3_LYULZKxi9Ms71jeSzsU",
+    authDomain: "ordonnanceform.firebaseapp.com",
+    databaseURL: "https://ordonnanceform-default-rtdb.firebaseio.com",
+    projectId: "ordonnanceform",
+    storageBucket: "ordonnanceform.appspot.com",
+    messagingSenderId: "1056227679108",
+    appId: "1:1056227679108:web:9f842ed02944b215d11bd1"
+    };
+  
+    //initialize firebase
+    const app = initializeApp(firebaseConfig);
+    
+    //reference your database
+    const db = getDatabase(app);
+    var ordonnanceFormDB = ref(db, 'ordonnanceForm');
+  
+    //get form elements
+    const nomInput = document.getElementById('a');
+    const prenomInput = document.getElementById('b');
+    const medicamentInput = document.getElementById('c');
+    const usageInput = document.getElementById('d');
+    const observationInput = document.getElementById('e');
+  
+    //add event listener to the "Sauvegarder" button
+    const sauvegarderButton = document.querySelector('.register-button');
+    sauvegarderButton.addEventListener('click', () => {
+      const nom = nomInput.value;
+      const prenom = prenomInput.value;
+      const medicament = medicamentInput.value;
+      const usage = usageInput.value;
+      const observation = observationInput.value;
+      if (nom === '' || prenom === '' || medicament === '' || usage === '' || observation === '') {
+    // if any field is empty, show an error message
+    alert('Veuillez remplir tous les champs.');
+  } else {
+      //create a new object with the form data
+      const newOrdonnance = {
+        Nom: nom,
+        Prenom: prenom,
+        Médicament: medicament,
+        Usage: usage,
+        Observation: observation
+      };
+  
+      //add the new object to the database
+     //add the new object to the database
+    push(ordonnanceFormDB, newOrdonnance).then(() => {
+    //reset the form after data is successfully saved
+    document.getElementById('myForm').reset();
+    //show success message
+    const alert = document.querySelector('.alert');
+    alert.style.display = 'block';
+    setTimeout(() => {
+    alert.style.display = 'none';
+   }, 3000); //hide alert after 3 seconds
+}).catch((error) => {
+  console.error(error);
+});
+  }
+    });
+  </script>
+</body>
+</html>

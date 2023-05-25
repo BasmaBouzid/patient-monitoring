@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Statistiques médicales</title>
+	
+  
+  <style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  header {
+    background-color: #336699;
+    color: white;
+    padding: 20px;
+    height: 30px;
+  }
+  
+  main {
+    display: flex;
+    flex-wrap: wrap;/*Lorsque flex-wrap: wrap est utilisé, les éléments flexibles sont disposés de gauche à droite sur chaque ligne, puis de haut en bas pour les lignes suivantes.*/
+    justify-content: space-between;/*les éléments flexibles sont placés de manière à ce qu'il y ait un espace égal entre eux,*/
+    padding: 20px;
+  }
+  
+  section {
+    flex-basis: 45%;
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  }
+  
+  h2 {
+    margin-top: 0;
+  }
+  
+  canvas {
+    width: 100%;
+    height: 300px;
+  }
+  
+  
+  </style>
+  
+</head>
+<body>
+	<header>
+		<h2 style="padding-top: 5px;">Statistiques médicales</h2>
+	</header>
+	<main>
+    <section>
+			<h2>Les patients</h2>
+		
+      <canvas id="chart0" ></canvas>
+		</section>
+    <section>
+			<h2>Catégories de patients</h2>
+			<canvas id="chart6"></canvas>
+		</section>
+		<section>
+			<h2>Revenu</h2>
+		
+      <canvas id="chart1"></canvas>
+		</section>
+		<section>
+			<h2>Chiffre d'affaires par acte médical</h2>
+			<canvas id="chart2"></canvas>
+		</section>
+		<section>
+			<h2>Nombre de consultations</h2>
+			
+      <canvas id="chart3"></canvas>
+		</section>
+		<section>
+			<h2>Assurance</h2>
+			<canvas id="chart4"></canvas>
+		</section>
+		<section>
+			<h2>Résidence</h2>
+			<canvas id="chart5"></canvas>
+		</section>
+		<section>
+			<h2>Motifs de consultation</h2>
+			<canvas id="chart7"></canvas>
+		</section>
+	</main>
+	
+
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+ 
+
+  <script>
+
+const ctx0 = document.getElementById('chart0');
+ctx0.width = 50;
+ctx0.height = 50;
+  new Chart(ctx0, {
+    type: 'doughnut',
+    data: {
+      labels: [
+    'Hommes',
+    'Femmes'
+   
+  ],
+  datasets: [{
+    label: 'Nombre',
+    data: [300, 200],
+    backgroundColor: [
+    'rgb(54, 162, 235)',
+      'rgb(255, 99, 132)',
+      
+      
+    ],
+    hoverOffset: 25
+  }]
+    },
+    options: {
+    cutout: '30%', //diametre
+    radius: '40%', // epaisseur de rayon (qui sont en couleur)
+    
+  }
+  });
+
+
+
+  const ctx6 = document.getElementById('chart6');
+
+  new Chart(ctx6, {
+    type: 'pie',
+    data: {
+      labels: [
+    'Moins de 15 ans',
+    'Entre  15 ans et 25 ans',
+    'Entre  25 ans et 40 ans',
+    'Entre  40 ans et 70 ans',
+    'Plus de 70 ans',
+  ],
+  datasets: [{
+    label: 'Nombre',
+    data: [50, 200,80,100,300],
+    backgroundColor: [
+    'rgb(50, 300, 20)',
+      'rgb(255, 99, 132)',
+      'rgb(70, 120, 132)',
+      'rgb(255, 500, 132)',
+      
+      'rgb(20, 800, 500)',
+      
+      
+    ],
+    hoverOffset: 25
+  }]
+  
+    },
+    options: {
+    cutout: '0%', //diametre
+    radius: '40%', // epaisseur de rayon (qui sont en couleur)
+    cutoutPercentage: 5,
+  }
+  });
+
+
+
+
+
+
+
+
+    const ctx = document.getElementById('chart1');
+  
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['vendredi', 'Samedi', 'Dimanche', 'Lundi', 'Mardi', 'Mercredi','Jeudi'],
+        datasets: [{
+          label: 'Le revenu',
+          data: [2500, 4000, 6000, 3500, 2000, 3000,27000],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+
+
+
+
+
+    const ctx1 = document.getElementById('chart2');
+  
+    new Chart(ctx1, {
+      type: 'bar',
+      data: {
+        labels: ['Consultation', 'ECG', 'Radiographie', 'Scanner Oscille'],
+        datasets: [{
+          label: 'Chiffre d"affaire par acte médical',
+          data: [21000, 7000, 6000, 18500],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+
+
+
+
+    const ctx3 = document.getElementById('chart3');
+  
+    new Chart(ctx3, {
+      type: 'line',
+      data: {
+        labels: ['vendredi', 'Samedi', 'Dimanche', 'Lundi', 'Mardi', 'Mercredi','Jeudi'],
+  datasets: [{
+    label:' Nombre de consultation',
+    data: [1, 2, 2, 1, 1, 1, 6],
+    fill: false,
+    borderColor: 'rgb(75, 192, 192)',
+    tension: 0.1
+  }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+     
+    });
+
+
+
+
+
+
+    const ctx4 = document.getElementById('chart4');
+
+  new Chart(ctx4, {
+    type: 'doughnut',
+    data: {
+      labels: [
+    'Assuré',
+    'Non Assuré',
+    'Non défini'
+   
+  ],
+  datasets: [{
+    label: 'Nombre',
+    data: [300, 200,50],
+    backgroundColor: [
+    'rgb(250, 162, 20)',
+      'rgb(30, 99, 32)',
+      'rgb(100, 10, 75)',
+      
+    ],
+    hoverOffset: 25
+  }]
+    },
+    options: {
+    cutout: '30%', //diametre
+    radius: '40%', // // détermine la distance maximale à laquelle les points de données peuvent être tracés à partir du centre du graphique.
+    
+  }
+  });
+
+
+
+
+
+
+
+  const ctx7 = document.getElementById('chart7');
+
+new Chart(ctx7, {
+  type: 'polarArea',
+  data: {
+    labels: [
+  'Suivi normale ',
+  'Douleur faciale',
+  'Douleur testiculaire',
+  'Soif intense'
+],
+datasets: [{
+  label: '',
+  data: [20, 50,100,200],
+  backgroundColor: [
+  'rgb(700, 300, 20)',
+    'rgb(30, 99, 32)',
+    'rgb(20, 36, 90)',
+    'rgb(250, 30, 300)',
+  ],
+  hoverOffset: 25
+}]
+  },
+ 
+
+});
+
+
+
+
+
+const ctx5= document.getElementById('chart5');
+new Chart(ctx5, {
+  type: 'bar', // type de graphique
+  data: {
+    labels: ['Monastir', 'Tunis', 'Manouba', 'Sousse', 'Mahdia', 'Sfax'], // Les étiquettes des catégories
+    datasets: [{
+      label: 'La résidence',
+      data: [12, 19, 3, 5, 2, 3], // Les données pour chaque catégorie
+      backgroundColor: 'rgba(255, 99, 132, 0.2)', // couleur de remplissage pour chaque barre
+      borderColor: 'rgba(255, 99, 132, 1)', // couleur de la bordure pour chaque barre
+      borderWidth: 1 // largeur de la bordure pour chaque barre
+    }]
+  },
+  
+});
+
+
+  </script>
+</body>
+</html>

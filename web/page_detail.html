@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Page détails</title>
+    
+    <style>nav {
+        position: fixed;
+        background-color: #333;
+        height: 60px;
+        width: 100%;
+      }
+      
+      nav ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        
+      }
+      
+      nav li {
+        margin: 20px;
+      
+      }
+      
+      nav a {
+        color: #fff;
+        text-decoration: none;
+        padding: 10px;
+        
+      }
+      
+      nav a:hover {
+        background-color: #555;
+      }
+
+
+
+
+
+
+      .container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.column {
+  flex: 1;
+  padding: 20px;
+}
+
+.column:not(:last-child) {
+  border-right: 2px solid green;
+}
+
+h2 {
+  margin-top: 0;
+  font-size: 24px;
+}
+
+
+.fa-user {
+  font-size: 32px;
+  margin-right: 10px;
+}
+form label,
+form input {
+display: block;
+}
+
+
+
+
+/* Mise en page générale */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Style pour la liste des consultations */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+
+
+
+
+
+  main {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+main h2 {
+  margin-top: 40px;
+}
+
+main ul {
+  list-style: disc;
+  padding-left: 20px;
+}
+
+main p {
+  margin-top: 10px;
+  line-height: 1.5;
+}
+
+      </style>
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="#1">Info</a></li>
+        <li><a href="#2">Consultation</a></li>
+        <li><a href="#3">Bilan</a></li>
+        <li><a href="#4">Radiologies</a></li>
+        <li><a href="#5">Ordonnances</a></li>
+        <li><a href="#6">Rendez-vous</a></li>
+        <li><a href="#7">Paiement</a></li>
+      </ul>
+    </nav>
+    <div class="container">
+      <h1 id="1"style="margin-top: 80px;" >Détails du patient</h1>
+     
+    </div>
+
+    <div class="container">
+        <div class="column">
+          <h2><i class="fa fa-user"></i> Informations patient</h2>
+          <form>
+            <!-- formulaire pour les informations du patient -->
+            <label for="n Dossiers">N° Dossier</label>
+        <input  id="n Dossiers" name="n Dossiers" >
+
+        <label for="Nom">Nom</label>
+        <input type="Nom" id="Nom" name="Nom >
+
+        <label for="Prénom">Prénom</label>
+        <input type="Prénom" id="Prénom" name="Prénom" >
+
+        <label for="Prefession">Prefession</label>
+        <input type="Prefession" id="Prefession" name="Prefession" >
+  
+        <label for="birthdate">Date de naissance :</label>
+        <input type="date" id="birthdate" name="birthdate"> 
+
+        <label for="Age">Age</label>
+        <input type="Age" id="Age" name="Age" >
+
+      
+        
+          </form>
+        </div>
+        <div class="column">
+          <h2>Coordonnées patient</h2>
+          <form>
+            <!-- formulaire pour les coordonnées du patient -->
+            <label for="email">Email</label>
+        <input type="email" id="email" name="email" >
+
+        <label for=Téléphone">Téléphone</label>
+        <input  id="Téléphone" name="Téléphone">
+
+        <label for="Adresse">Adresse</label>
+        <input  id="Adresse" name="Adresse">
+          </form>
+        </div>
+        <div class="column">
+          <h2>Autre</h2>
+          <form>
+            <!-- formulaire pour les autres détails du patient -->
+            <label for="Assurance">Assurance</label>
+        <input id="Assurance" name="Assurance">
+
+        <label for="GS">GS</label>
+        <input id="GS" name="GS" >
+
+        <label for="sexe">sexe</label>
+        <input id="sexe" name="sexe" >
+
+        <label for="Situation Familiale">Situation Familiale</label>
+        <input id="Situation Familiale" name="Situation Familiale >
+
+        <label for="Note">Note</label>
+        <input id="Note" name="Note" >
+          </form>
+        </div>
+      </div>
+
+
+      <h1 style="text-align:center;margin-top: 50px;" id="2">Consultation</h1>
+
+
+      
+      <table style="table-layout: fixed; width: 100%;">
+        <colgroup>
+          <col style="width: 25%;">
+          <col style="width: 25%;">
+          <col style="width: 25%;">
+          <col style="width: 25%;">
+        </colgroup>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Médecin</th>
+            <th>Spécialité</th>
+            <th>Résumé</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>02/01/2023</td>
+            <td>Dr. Dupont</td>
+            <td>Médecine générale</td>
+            <td>Consultation de suivi, pas de changements notables</td>
+          </tr>
+          <tr>
+            <td>22/12/2022</td>
+            <td>Dr. Martin</td>
+            <td>Cardiologie</td>
+            <td>Examen de routine, tension artérielle légèrement élevée</td>
+          </tr>
+          <tr>
+            <td>10/11/2022</td>
+            <td>Dr. Dubois</td>
+            <td>Gynécologie</td>
+            <td>Examens annuels, résultats normaux</td>
+          </tr>
+          <!-- Ajouter plus de lignes si nécessaire -->
+        </tbody>
+      </table>
+     
+
+
+
+      <h1 style="text-align:center;margin-top: 50px;" id="3">Bilan</h1>
+
+      <main>
+        <h2>Bilans antérieurs</h2>
+        <ul>
+          <li>10/02/2022 - Bilan sanguin - Résultats normaux</li>
+          <li>15/10/2021 - Bilan de thyroïde - Niveau de TSH élevé</li>
+          <li>30/06/2021 - Bilan de diabète - Niveau de glucose normal</li>
+          <!-- Ajouter plus d'éléments si nécessaire -->
+        </ul>
+        
+        <h2>Dernier bilan</h2>
+        <p>Date : 12/04/2022</p>
+        <p>Type : Bilan de sang</p>
+        <p>Résultats : Niveau de cholestérol légèrement élevé, le patient doit suivre un régime alimentaire pour réduire son taux de cholestérol.</p>
+
+        <h1 style="text-align:center;margin-top: 50px;" id="4">Radiologies</h1>
+        <h2>Liste des radiologies</h2>
+      <ul>
+        <li>
+          <h3>Radiologie du 02/01/2023</h3>
+          <p><a href="images/radiologie1.jpg">Voir l'image</a></p>
+          <p>Commentaires : pas de pathologies détectées</p>
+        </li>
+        <li>
+          <h3>Radiologie du 22/12/2022</h3>
+          <p><a href="images/radiologie2.jpg">Voir l'image</a></p>
+          <p>Commentaires : petite lésion à surveiller</p>
+        </li>
+        <li>
+          <h3>Radiologie du 10/11/2022</h3>
+          <p><a href="images/radiologie3.jpeg">Voir l'image</a></p>
+          <p>Commentaires : résultats normaux</p>
+        </li>
+        <!-- Ajouter plus de radiologies si nécessaire -->
+      </ul>
+
+
+
+
+      <h1 style="text-align:center;margin-top: 50px;" id="5">Ordonnances</h1>
+      <ul>
+        <li>
+          <h2>Ordonnance #1234567</h2>
+          <ul>
+            <li><strong>Médecin:</strong> Dr. Dupont</li>
+            <li><strong>Date:</strong> 02/01/2023</li>
+            <li><strong>Médicaments:</strong></li>
+            <ul>
+              <li>Ibuprofène 200mg, 2 comprimés 3 fois par jour pendant 5 jours</li>
+              <li>Amoxicilline 500mg, 1 comprimé 3 fois par jour pendant 7 jours</li>
+            </ul>
+          </ul>
+        </li>
+        <li>
+          <h2>Ordonnance #9876543</h2>
+          <ul>
+            <li><strong>Médecin:</strong> Dr. Martin</li>
+            <li><strong>Date:</strong> 22/12/2022</li>
+            <li><strong>Médicaments:</strong></li>
+            <ul>
+              <li>Losartan 50mg, 1 comprimé par jour pendant 30 jours</li>
+              <li>Simvastatine 20mg, 1 comprimé par jour pendant 30 jours</li>
+              <li>Aspirine 100mg, 1 comprimé par jour pendant 30 jours</li>
+            </ul>
+          </ul>
+        </li>
+        <!-- Ajouter plus d'ordonnances si nécessaire -->
+      </ul>
+
+
+
+      <h1 style="text-align:center;margin-top: 50px;" id="6">Rendez-vous</h1>
+      <table style="table-layout: fixed; width: 100%;">
+        <thead>
+          <tr>
+            <th>Date et heure</th>
+            <th>Médecin</th>
+            <th>Spécialité</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>02/04/2023 - 14h00</td>
+            <td>Dr. Dupont</td>
+            <td>Médecine générale</td>
+            <td><a href="#">Modifier</a> | <a href="#">Annuler</a></td>
+          </tr>
+          <tr>
+            <td>10/03/2023 - 11h30</td>
+            <td>Dr. Martin</td>
+            <td>Cardiologie</td>
+            <td><a href="#">Modifier</a> | <a href="#">Annuler</a></td>
+          </tr>
+          <tr>
+            <td>22/02/2023 - 16h15</td>
+            <td>Dr. Dubois</td>
+            <td>Gynécologie</td>
+            <td><a href="#">Modifier</a> | <a href="#">Annuler</a></td>
+          </tr>
+          <!-- Ajouter plus de lignes si nécessaire -->
+        </tbody>
+      </table>
+
+
+
+
+      <h1 style="text-align:center;margin-top: 50px;" id="7">Paiement</h1>
+      <table style="table-layout: fixed; width: 100%;">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Montant</th>
+            <th>Type de paiement</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>01/02/2023</td>
+            <td>100 €</td>
+            <td>Carte bancaire</td>
+          </tr>
+          <tr>
+            <td>01/01/2023</td>
+            <td>50 €</td>
+            <td>Espèces</td>
+          </tr>
+          <tr>
+            <td>01/12/2022</td>
+            <td>75 €</td>
+            <td>Chèque</td>
+          </tr>
+          <!-- Ajouter plus de lignes si nécessaire -->
+        </tbody>
+      </table>
+
+
+      </main>
+    
+
+      
+
+
+  </body>
+</html>

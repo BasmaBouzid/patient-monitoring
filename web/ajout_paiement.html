@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Ajout de paiement</title>
+
+  <style>
+        
+.ba {
+    background-color: #0c08f7;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .register-container {
+    background-color: #ffffff;
+    width: 50%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+  }
+  
+  .register-header {
+    font-size: 2em;
+    margin-bottom: 20px;
+  }
+  
+  .register-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    margin-bottom: 5px;
+  }
+  
+  input {
+    padding: 5px;
+    margin-bottom: 20px;
+    border: solid;
+    border-radius: 5px;
+  }
+  
+  .accept-terms {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .accept-terms label {
+    margin-left: 10px;
+  }
+  
+  .register-button {
+    background-color: #0c08f7;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    cursor: pointer;
+  }
+  
+  .register-button:hover {
+    background-color: #0805be;
+  }
+    .alert{
+      background-color: aquamarine;
+      padding:10px;
+      text-align: center;
+      font-weight: 700;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="ba">
+    <div class="register-container">
+      <form class="register-form" id="myForm">
+        <div class="alert">Le formulaire est envoyé</div>
+        <h1 class="register-header">Ajout de paiement</h1>
+        <label for="username">Nom</label>
+        <input type="text" id="a" name="username" placeholder="Entrez le nom">
+
+        <label for="username">Prénom</label>
+        <input type="text" id="b" name="username" placeholder="Entrez le prénom">
+
+        <label for="username">Titre de paiement</label>
+        <input type="text" id="c" name="username" placeholder="">
+
+        <label for="date">Date de paiement</label>
+        <input type="date" id="d" name="date">
+
+        <label for="username">Montant</label>
+        <input type="text" id="e" name="username" placeholder="">
+
+        <button type="submit" class="register-button">Sauvegarder</button>
+      </form>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
+    import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-database.js";
+
+    const firebaseConfig = {
+        apiKey:"AIzaSyCtLS8jnO2ugtcS_DZdDwPieQF5m5LeyUU",
+    authDomain: "paiementform.firebaseapp.com",
+    databaseURL: "https://paiementform-default-rtdb.firebaseio.com/",
+    projectId: "paiementform",
+  storageBucket: "paiementform.appspot.com",
+  messagingSenderId: "1021981192160",
+  appId: "1:1021981192160:web:c88440efe4e8d9bceb4585",
+  measurementId: "G-F9RWGX5KWW"
+    };
+
+    // initialize Firebase
+    const app = initializeApp(firebaseConfig);
+
+    // reference your database
+    const db = getDatabase(app);
+    const paiementFormDB = ref(db, 'paiementForm');
+
+    // get form data and submit it to Firebase
+    const form = document.getElementById('myForm');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const nom = document.getElementById('a').value;
+      const prenom = document.getElementById('b').value;
+      const titre = document.getElementById('c').value;
+      const date = document.getElementById('d').value;
+      const montant = document.getElementById('e').value;
+if (nom === '' || prenom === '' || titre === '' || date=== '' || montant === '') {
+    // if any field is empty, show an error message
+    alert('Veuillez remplir tous les champs.');
+  } else {
+      // push data to Firebase
+      push(paiementFormDB, {
+        nom: nom,
+        prenom: prenom,
+        titre: titre,
+        date: date,
+        montant: montant
+      });
+
+      // show alert
+      const alert = document.querySelector('.alert');
+      alert.style.display = 'block';
+      setTimeout(() => {
+    alert.style.display = 'none';
+  }, 3000); 
+      // reset form
+      form.reset();
+}
+    });
+  </script>
+</body>
+</html>

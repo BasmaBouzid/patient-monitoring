@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>home médicale</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="style.css">
+
+
+</head>
+<body>
+
+
+  <header>
+    <div class="left">
+      <h1>Cabinet médical</h1>
+    </div>
+    <div class="right">
+      <div class="name">
+        <h2>Nom Prénom</h2>
+      </div>
+      <div class="photo">
+        <img src="C:\Users\elbootic.com\Documents\doctor1.jpeg" alt="Photo de médecin">
+      </div>
+    </div>
+  </header>
+  
+
+<section>
+  <nav>
+    <ul>
+      <li class="parent"><a href="#">Dossiers médicaux des patients</a>
+        <ul class="submenu">
+          <li><a href="patient.html" target="myiframe">Patient</a></li>
+         
+        </ul>
+      </li>
+      <li><a href="rendez_vous.html" target="myiframe" >Rendez-vous</a></li>
+      <li><a href="ordonnance.html" target="myiframe">Ordonnances</a></li>
+      <li><a href="tableau_bord.html" target="myiframe">Tableau de bord</a></li>
+      <li><a href="chat.html" target="myiframe">Chat</a></li>
+      <li><a href="paiement.html" target="myiframe">Gestion de paiement</a></li>
+      <li><a href="statistique.html" target="myiframe" >Statistique</a></li>
+      <li><a href="droit.html" target="myiframe">Droit d'Accées</a></li>
+      <li class="parent"><a href="#">Paramétre</a>
+        <ul class="submenu">
+          <li><a href="information_generale.html" target="myiframe">Information générale</a></li>
+         
+        </ul>
+      </li>
+      <li><a href="base.html" target="myiframe">Base de Données</a></li>
+      <div id="deconnexion"><a href="login.html" id="logout" style=" text-decoration: none;  color: white;">Déconnexion</a>
+      </div>
+
+    </ul>
+  </nav>
+  
+  
+  <article>
+    
+    <iframe  src="page1.html"  name="myiframe" width="100%" height="550" style="border: none;"></iframe>
+   
+  </article>
+</section>
+
+
+<footer>
+  <p>Tous droits réservés &copy; 2023</p>
+</footer>
+
+<script>
+ 
+ 
+
+
+
+
+
+//logout
+  const logoutButton = document.getElementById('logout');
+
+logoutButton.addEventListener('click', function() {
+
+  window.location.href = 'login.html';
+});
+
+</script>
+</body>
+</html>
+

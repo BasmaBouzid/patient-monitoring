@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Page de registration</title>
+ <style>
+
+    
+.ba {
+    background-color: #0c08f7;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .register-container {
+    background-color: #ffffff;
+    width: 50%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+  }
+  
+  .register-header {
+    font-size: 2em;
+    margin-bottom: 20px;
+  }
+  
+  .register-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    margin-bottom: 5px;
+  }
+  
+  input {
+    padding:5px;
+    margin-bottom: 20px;
+    border: solid;
+    border-radius: 5px;
+  }
+  
+  .accept-terms {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .accept-terms label {
+    margin-left: 10px;
+  }
+  
+  .register-button {
+    background-color: #0c08f7;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    cursor: pointer;
+  }
+  
+  .register-button:hover {
+    background-color: #0805be;
+  }
+  .alert{
+      background-color: aquamarine;
+      padding:10px;
+      text-align: center;
+      font-weight: 700;
+      display: none;
+    }
+ </style>
+
+</head>
+<div class="ba">
+  <div class="register-container">
+    <form class="register-form" id="myForm">
+      <div class="alert">Le formulaire est envoyé</div>
+      <h1 class="register-header">Ajout de rendez-vous</h1>
+      <label for="username">Nom du patient</label>
+      <input type="text" id="username" name="username" placeholder="Entrez le nom">
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="Entrez votre adresse e-mail">
+
+      <label for="date">Choisissez une date :</label>
+      <input type="date" id="date" name="date">
+      
+      <label for="timePicker">Choisissez un temps :</label>
+      <input type="time" id="timePicker" name="timePicker">
+      
+      <button type="submit" class="register-button">Sauvegarder</button>
+    </form>
+  </div>
+</div>
+
+<!-- Add Firebase SDK -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
+  import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-database.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyA8YBECTYYRgWOP6IaQn3zhYGHDmKGpVVY",
+    authDomain: "rendezform.firebaseapp.com",
+    databaseURL: "https://rendezform-default-rtdb.firebaseio.com/",
+    projectId: "rendezform",
+    storageBucket: "rendezform.appspot.com",
+    messagingSenderId: "274855162285",
+    appId: "1:274855162285:web:a8752219031d2e5d5cb124",
+    measurementId: "G-8L3ESKXRJ5"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+
+  // Get a reference to the database service
+  const db = getDatabase(app);
+    const rendezFormDB = ref(db, 'rendezForm');
+
+
+  const form = document.getElementById('myForm');
+  const alertBox = document.querySelector('.alert');
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const username = form['username'].value;
+    const email = form['email'].value;
+    const date = form['date'].value;
+    const time = form['timePicker'].value;
+if (username === '' || email === '' || time === '' || date === '' ) {
+    // if any field is empty, show an error message
+    alert('Veuillez remplir tous les champs.');
+  } else {
+    // Send data to Firebase database
+    push(rendezFormDB, {
+      username: username,
+      email: email,
+      date: date,
+      time: time
+    });
+
+    // Display alert box
+    alertBox.style.display = 'block';
+
+    // Hide alert box after 3 seconds
+    setTimeout(() => {
+      alertBox.style.display = 'none';
+    }, 3000);
+
+    // Clear the form
+    form.reset();
+  }
+  });
+
+</script>
+</body>
+</html>

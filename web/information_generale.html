@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Informations générales</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			font-family: Arial, sans-serif;/*"font-family" est utilisée pour spécifier la police */
+		}
+		
+		header {
+			background-color: #336699;
+			color: #fff;
+			padding: 20px;
+			text-align: center;
+			box-shadow: 0px 2px 5px #888;
+		}
+		
+		h1 {
+			margin: 0;
+			font-size: 24px;
+			font-weight: bold;
+		}
+		
+		form {
+			margin: 5px auto;
+			max-width: 600px;
+			padding: 20px;
+			box-shadow: 0px 2px 5px #888;
+			background-color: #f9f9f9;
+			transform: translateY(20px);
+		}
+		
+		label {
+			display: block;
+			margin-bottom: 10px;
+			font-weight: bold;
+		}
+		
+		input[type="text"], input[type="tel"], input[type="url"] {
+			width: 100%;
+			padding: 10px;
+			margin-bottom: 20px;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			box-sizing: border-box;
+		}
+		
+		select {
+			width: 100%;
+			padding: 10px;
+			margin-bottom: 20px;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			box-sizing: border-box;
+		}
+		
+		input[type="submit"] {
+			background-color: #336699;
+			color: #fff;
+			border: none;
+			padding: 10px 20px;
+			border-radius: 4px;
+			cursor: pointer;
+		}
+		
+		input[type="submit"]:hover {
+			background-color: #23527c;
+		}
+		.alert{
+    background-color: aquamarine;
+    padding:10px;
+    text-align: center;
+    font-weight: 700;
+    display: none;
+  }
+	</style>
+</head>
+<body>
+	<header>
+		<h1>Informations de la clinique et du médecin</h1>
+	</header>
+	<form id="myForm" class="register-form">
+		<div class="alert">la formulaire est envoyée</div>
+		<label for="nom_clinique">Nom de la clinique :</label>
+		<input type="text" id="nom_clinique" name="nom_clinique">
+		
+		<label for="nom_medecin">Nom du médecin :</label>
+		<input type="text" id="nom_medecin" name="nom_medecin">
+		
+		<label for="specialite_medecin">Spécialité du médecin :</label>
+		<select id="specialite_medecin" name="specialite_medecin">
+			<option value="">Choisissez une spécialité</option>
+			<option value="cardiologie">Cardiologie</option>
+			<option value="dermatologie">Dermatologie</option>
+			<option value="gastroenterologie">Gastroentérologie</option>
+			<option value="neurologie">Neurologie</option>
+			<option value="pneumologie">Pneumologie</option>
+		</select>
+       
+        <div class="form-group">
+          <label for="address"><strong>Adresse :</strong></label>
+          <input type="text" class="form-control" id="address" name="address">
+        </div>
+        
+        <div class="form-group">
+          <label for="phone"><strong>Téléphone :</strong></label>
+          <input type="tel" class="form-control" id="phone" name="phone">
+        </div>
+        <div class="form-group">
+          <label for="fax"><strong>Fax :</strong></label>
+          <input type="tel" class="form-control" id="fax" name="fax">
+        </div>
+        <div class="form-group">
+          <label for="website"><strong>Site web :</strong></label>
+          <input type="url" class="form-control" id="website" name="website">
+        </div>
+        <button type="submit" class="btn btn-primary">Sauvegarder</button>
+      <script type="module">
+       import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
+    import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-database.js";
+  
+    const firebaseConfig = {
+      apiKey: "AIzaSyDbevP2sU05fYcmoWU3BNt-TqNEt-1Td_I",
+  authDomain: "informationform-29a4a.firebaseapp.com",
+  databaseURL: "https://informationform-29a4a-default-rtdb.firebaseio.com",
+  projectId: "informationform-29a4a",
+  storageBucket: "informationform-29a4a.appspot.com",
+  messagingSenderId: "609483541699",
+  appId: "1:609483541699:web:e97f40baf393660ba42676",
+  measurementId: "G-CJ64E3PGPE"
+    };
+  
+    //initialize firebase
+    const app = initializeApp(firebaseConfig);
+    
+    //reference your database
+    const db = getDatabase(app);
+    var informationFormDB = ref(db, 'informationForm');
+	// add an event listener to the submit button
+const submitBtn = document.querySelector('button[type="submit"]');
+submitBtn.addEventListener('click', function(event) {
+  // prevent the default form submission
+  event.preventDefault();
+  
+  // validate the form fields
+  const nomClinique = document.getElementById('nom_clinique').value;
+  const nomMedecin = document.getElementById('nom_medecin').value;
+  const specialiteMedecin = document.getElementById('specialite_medecin').value;
+  const address = document.getElementById('address').value;
+  const phone = document.getElementById('phone').value;
+  const fax = document.getElementById('fax').value;
+  const website = document.getElementById('website').value;
+
+  if (nomClinique === '' || nomMedecin === '' || specialiteMedecin === '' || address === '' || phone === '' || fax === '' || website === '') {
+    // if any field is empty, show an error message
+    alert('Veuillez remplir tous les champs.');
+  } else {
+    // if all fields are filled, submit the form to Firebase
+    const informationForm = {
+      nom_clinique: nomClinique,
+      nom_medecin: nomMedecin,
+      specialite_medecin: specialiteMedecin,
+      address: address,
+      phone: phone,
+      fax: fax,
+      website: website
+    };
+    push(informationFormDB, informationForm);
+    
+    // show a success message
+    const successMsg = document.querySelector('.alert');
+    successMsg.style.display = 'block';
+    setTimeout(function() {
+      successMsg.style.display = 'none';
+    }, 3000);
+  }
+});
+
+	  </script>
+    </div>

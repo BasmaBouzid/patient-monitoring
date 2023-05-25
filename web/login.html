@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Page de connexion pour les médecins</title>
+  <link rel="stylesheet" href="style.css">
+  
+</head>
+<body id="2">
+  <div class="background-image">
+    <div class="login-container">
+      <h1 class="login-header">Bienvenue</h1>
+      <form class="login-form" id="login-form">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="admin@gmail.com">
+        <label for="password">Mot de passe</label>
+        <input type="password" id="password" name="password" placeholder="Entrez votre mot de passe">
+        <button type="submit" class="login-button" id="cnx" >Connexion</button>
+
+      </form>
+      <div class="login-links">
+        <div class="login-link">
+          <a href="sign-up.html">Créer un compte</a>
+        </div>
+        <div class="login-link">
+          <a href="recupére_mot de passe.html">Mot de passe oublié</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="module">// code JavaScript pour rediriger vers la page home lorsqu'on clique sur le bouton "Connexion"
+ 
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
+import {  getDatabase, set, ref, update  } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-database.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyD2gIA-j9FQVYYusQ7urmLniTQw8_1UZf8",
+    authDomain: "loginform-18bc1.firebaseapp.com",
+    databaseURL:"https://loginform-18bc1-default-rtdb.firebaseio.com/",
+    projectId: "loginform-18bc1",
+    storageBucket: "loginform-18bc1.appspot.com",
+    messagingSenderId: "919815225914",
+    appId: "1:919815225914:web:508a675fe516dc2e72eb03"
+};
+  
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+const loginFormDB = ref(db, 'loginForm');
+const auth = getAuth();
+
+document.getElementById('cnx').addEventListener('click',(e) => {
+   e.preventDefault();
+   const email = document.getElementById('email').value;
+   const password = document.getElementById('password').value;
+    // Vérifier si l'adresse email est valide
+    if (!/\S+@\S+\.\S+/.test(email)) {
+      alert('Veuillez entrer une adresse email valide.');
+      return;
+   }
+
+   // Vérifier si le mot de passe est suffisamment long
+   if (password.length < 6) {
+      alert('Le mot de passe doit contenir au moins 6 caractères.');
+      return;
+   }
+
+   signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+         // Signed in 
+         const user = userCredential.user;
+         const dt = new Date();
+         update(ref(db, 'users/' + user.uid),{
+            last_login: dt,
+         });
+        
+         window.location.replace("home.html");
+      })
+      .catch((error) => {
+         const errorCode = error.code;
+         const errorMessage = error.message;
+         alert(errorMessage);
+      });
+});
+
+</script>
+</body>
+</html>

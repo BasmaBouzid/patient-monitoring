@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Liste des patients</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+      #ajouter-paiement {
+  color: #fff;
+  background-color: #0c08f7;
+  padding: 8px 16px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 16px;
+  margin-left: 500px;
+
+}
+      #ajouter-paiement:hover {
+  background-color: #0805be;
+  color: #fff;
+}
+
+.modal {
+  display:none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 120%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+  
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 25%;
+  height: 105%;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,/*sélectionner un élément HTML lorsque la souris survole cet élément.*/
+.close:focus { /* état de focus, c'est-à-dire lorsqu'il est sélectionné par l'utilisateur.*/
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+    </style>
+  </head>
+  <body>
+    <header style="background-color: #336699; color: white;margin:15px;"> 
+      <h2>  Paiement</h2>
+      <a href="ajout_paiement.html" id="ajouter-paiement">Ajouter Paiement</a>
+    </header>
+
+    
+
+
+
+    <div class="container">
+      <h1>Gestion des Paiements</h1>
+      <table>
+        <colgroup>
+            <col style="width: 10%;">
+            <col style="width: 10%;">
+            <col style="width: 20%;">
+			      <col style="width: 15%;">
+			      <col style="width:20%;">
+          </colgroup>
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Prénom</th>
+			<th>Titre de paiement </th>
+			<th>Date paiement</th>
+			<th>Montant</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Smith</td>
+            <td>John</td>
+			<td>soin et taitement dentaires reguliers </td>
+			<td>14/02/2023</td>
+            <td>150DT </td>
+			<td>
+                <a href="" class="details-btn">Modifier</a>
+                <a href="#" class="delete-btn">Supprimer</a>
+              </td>
+          </tr>
+          <tr>
+            <td>Doe</td>
+            <td>Jane</td>
+			<td>soin et taitement dentaires reguliers </td>
+			<td>14/02/2023</td>
+            <td>150DT </td>
+			<td>
+
+                <a href="" class="details-btn">Modifier</a>
+                <a href="#" class="delete-btn">Supprimer</a>
+              </td>
+          </tr>
+          <tr>
+            <td>Williams</td>
+            <td>Michael</td>
+			<td>soin et taitement dentaires reguliers </td>
+			<td>14/02/2023</td>
+            <td>150DT </td>
+			<td>
+                <a href="" class="details-btn">Modifier</a>
+                <a href="#" class="delete-btn">Supprimer</a>
+              </td>
+          </tr>
+          <tr>
+            <td>Johnson</td>
+            <td>Sara</td>
+			<td>soin et taitement dentaires reguliers </td>
+			<td>14/02/2023</td>
+            <td>150DT </td>
+			<td>
+                <a href="" class="details-btn">Modifier</a>
+                <a href="#" class="delete-btn">Supprimer</a>
+              </td>
+          </tr>
+          <tr>
+            <td>Lee</td>
+            <td>David</td>
+			<td>soin et taitement dentaires reguliers </td>
+			<td>14/02/2023</td>
+            <td>150DT </td>
+			<td>
+                <a href="" class="details-btn">Modifier</a>
+                <a href="#" class="delete-btn">Supprimer</a>
+              </td>
+          </tr>
+          <tr>
+            <td>Chen</td>
+            <td>Lisa</td>
+			<td>soin et taitement dentaires reguliers </td>
+			<td>14/02/2023</td>
+            <td>150DT </td>
+			<td>
+                <a href="" class="details-btn">Modifier</a>
+                <a href="#" class="delete-btn">Supprimer</a>
+              </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Modifier Gestion</h2>
+        <form>
+          <label for="nom">Nom :</label>
+          <input type="text" id="nom" name="nom" required>
+
+          <label for="prenom">Prénom :</label>
+          <input type="text" id="prenom" name="prenom" required>
+
+          <label for="medicament">Titre de paiement :</label>
+          <input type="text" id="a" name="medicament" required>
+
+          <label for="dosage">Data paiement :</label>
+          <input type="text" id="b" name="dosage" required>
+
+          <label for="dosage">Montant :</label>
+          <input type="text" id="c" name="dosage" required>
+          <button type="button" id="save-btn">Sauvegarder</button>
+        </form>
+      </div>
+    <script>
+      // Sélectionner tous les boutons "Supprimer"
+const deleteBtns = document.querySelectorAll('.delete-btn');
+
+// Parcourir tous les boutons et ajouter un événement click à chacun
+deleteBtns.forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.preventDefault(); // Empêcher le comportement par défaut du lien
+    
+    // Supprimer la ligne correspondante du tableau
+    const row = e.target.parentNode.parentNode;
+    row.parentNode.removeChild(row);
+  });
+});
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.querySelectorAll('.details-btn');
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+
+btn.forEach(function(btn) {
+  btn.addEventListener("click", function(event) {
+    event.preventDefault();
+  modal.style.display = "block";
+  
+  // Get the values from the table and fill in the form
+  var row = event.target.closest("tr");
+  var nom = row.querySelector("tr td:first-child").textContent;
+  var prenom =row.querySelector("tr td:nth-child(2)").textContent;
+  var titrepaiement =row.querySelector("tr td:nth-child(3)").textContent;
+  var datepaiement = row.querySelector("tr td:nth-child(4)").textContent;
+  var montant = rowt.querySelector("tr td:nth-child(5)").textContent;
+
+
+  document.getElementById("nom").value = nom;
+  document.getElementById("prenom").value = prenom;
+  document.getElementById("a").value = titrepaiement;
+  document.getElementById("b").value = datepaiement;
+  document.getElementById("c").value =montant;
+});
+});
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display= "none";
+}
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+if (event.target == modal) {
+modal.style.display = "none";
+}
+}
+
+// Save button action
+document.getElementById("save-btn").onclick = function() {
+// Get the updated values from the form
+var updatedNom = document.getElementById("nom").value;
+var updatedPrenom = document.getElementById("prenom").value;
+var updatedtitrepaiement = document.getElementById("a").value;
+var updateddatepaiement = document.getElementById("b").value;
+var updatedmontant = document.getElementById("c").value;
+// Update the table with the new values
+var row = modal.previousElementSibling;
+row.querySelector("tr td:first-child").textContent = updatedNom;
+row.querySelector("tr td:nth-child(2)").textContent = updatedPrenom;
+row.querySelector("tr td:nth-child(3)").textContent = updatedtitrepaiement;
+row.querySelector("tr td:nth-child(4)").textContent = updateddatepaiement;
+row.querySelector("tr td:nth-child(5)").textContent = updatedmontant;
+// Close the modal
+modal.style.display = "none";
+}
+
+
+
+
+
+
+
+
+    </script>
+  </body>
+</html>

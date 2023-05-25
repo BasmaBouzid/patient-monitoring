@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Récupération de mot de passe</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="container">
+      <h1>Récupération de mot de passe</h1>
+      <form>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Entrez votre adresse email" required>
+        <button type="submit" id="cnx">Envoyer</button>
+      </form>
+    </div>
+    <script type="module">// code JavaScript pour rediriger vers la page home lorsqu'on clique sur le bouton "Connexion"
+ 
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
+      import {  getDatabase, set, ref, update  } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-database.js";
+      import { sendPasswordResetEmail,getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js";
+      
+      const firebaseConfig = {
+          apiKey: "AIzaSyD2gIA-j9FQVYYusQ7urmLniTQw8_1UZf8",
+          authDomain: "loginform-18bc1.firebaseapp.com",
+          databaseURL:"https://loginform-18bc1-default-rtdb.firebaseio.com/",
+          projectId: "loginform-18bc1",
+          storageBucket: "loginform-18bc1.appspot.com",
+          messagingSenderId: "919815225914",
+          appId: "1:919815225914:web:508a675fe516dc2e72eb03"
+      };
+        
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const db = getDatabase(app);
+      const loginFormDB = ref(db, 'loginForm');
+      const auth = getAuth();
+      const form = document.querySelector('form');
+
+      document.getElementById('cnx').addEventListener('click',(e) => {
+   e.preventDefault();
+
+  const email = document.getElementById('email').value;
+  
+
+  sendPasswordResetEmail(auth,email)
+    .then(() => {
+      alert('Email de récupération de mot de passe envoyé avec succès !');
+    })
+    .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // ..
+  });
+});
+
+  </script>      
+  </body>
+</html>

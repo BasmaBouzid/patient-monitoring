@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Liste des patients</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header style="background-color: #336699; color: white;"> <h2>  Patient</h2></header>
+    <div class="container">
+      <h1>Liste des patients</h1>
+      <table>
+        <colgroup>
+            <col style="width: 33.33%;">
+            <col style="width: 33.33%;">
+            <col style="width: 33.33%;">
+          </colgroup>
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Smith</td>
+            <td>John</td>
+            <td>
+                <a href="page_detail.html" class="details-btn">Détails</a>
+                <a href="#" class="delete-btn">Supprimer</a>
+              </td>
+          </tr>
+          <tr>
+            <td>Doe</td>
+            <td>Jane</td>
+            <td>
+                <a href="page_detail.html" class="details-btn">Détails</a>
+                <a href="#" class="delete-btn">Supprimer</a>
+              </td>
+          </tr>
+          <tr>
+            <td>Williams</td>
+            <td>Michael</td>
+            <td>
+                <a href="page_detail.html" class="details-btn">Détails</a>
+                <a href="#" class="delete-btn">Supprimer</a>
+              </td>
+          </tr>
+          <tr>
+            <td>Johnson</td>
+            <td>Sara</td>
+            <td>
+                <a href="page_detail.html" class="details-btn">Détails</a>
+                <a href="#" class="delete-btn">Supprimer</a>
+              </td>
+          </tr>
+          <tr>
+            <td>Lee</td>
+            <td>David</td>
+            <td>
+                <a href="page_detail.html" class="details-btn">Détails</a>
+                <a href="#" class="delete-btn">Supprimer</a>
+              </td>
+          </tr>
+          <tr>
+            <td>Chen</td>
+            <td>Lisa</td>
+            <td>
+                <a href="page_detail.html" class="details-btn">Détails</a>
+                <a href="#" class="delete-btn">Supprimer</a>
+              </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <script>
+         // Sélectionner tous les boutons "Supprimer"
+const deleteBtns = document.querySelectorAll('.delete-btn');
+
+// Parcourir tous les boutons et ajouter un événement click à chacun
+deleteBtns.forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.preventDefault(); // Empêcher le comportement par défaut du lien
+    
+    // Supprimer la ligne correspondante du tableau
+    const row = e.target.parentNode.parentNode;/*permet de récupérer l'élément parent du parent de l'élément qui a déclenché l'événement. Cette expression est souvent utilisée pour manipuler des éléments HTML à l'intérieur d'un tableau, où les événements sont souvent déclenchés par des éléments de la ligne du tableau */
+    row.parentNode.removeChild(row);
+  });
+});
+    </script>
+  </body>
+</html>

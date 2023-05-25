@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Liste des patients</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+      #ajouter-ordonnance {
+  color: #fff;
+  background-color: #0c08f7;
+  padding: 8px 16px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 16px;
+  margin-left: 500px;
+
+}
+      #ajouter-ordonnance:hover {
+  background-color: #0805be;
+  color: #fff;
+}
+.modal.show {
+  display: flex;
+}
+
+.modal.show .modal-content {
+  opacity: 1;
+  transform: translateY(0);
+}
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+ 
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 30%;
+  height: 110%;
+}
+
+
+.close {
+  color: #ed0a0a;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: rgb(237, 7, 7);
+  text-decoration: none;
+  cursor: pointer;
+}
+    </style>
+  </head>
+  <body>
+    <header style="background-color: #336699;color: white;margin:15px;"> 
+      <h2> Droit d'accés</h2>
+      <a href="ajout_droit.html" id="ajouter-ordonnance">Ajouter droit d'accés</a>
+    </header>
+    <div class="container">
+      <h1>Gestion des Droit d'Accés</h1>
+      <table>
+        <colgroup>
+            <col style="width: 10%;">
+            <col style="width: 10%;">
+            <col style="width: 15%;">
+			<col style="width: 20%;">
+			<col style="width:20%;">
+          </colgroup>
+        <thead>
+          <tr>
+            <th>Email</th>
+            <th>Fonction</th>
+			<th>specialité</th>
+			<th>Mot de passe</th>
+			
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Smith785@gmail.com</td>
+            <td>-----</td>
+			<td>médecin </td>
+			<td>hjkhgjh</td>
+            
+			<td>
+                <a href="" class="details-btn">Modifier</a>
+                <a href="#" class="delete-btn">Supprimer</a>
+              </td>
+          </tr>
+          <tr>
+            <td>Smith785@gmail.com</td>
+            <td>-----</td>
+			<td>médecin </td>
+			<td>hjkhgjh</td>
+			<td>
+
+                <a href="" class="details-btn">Modifier</a>
+                <a href="#" class="delete-btn">Supprimer</a>
+              </td>
+          </tr>
+          <tr>
+            <td>Smith785@gmail.com</td>
+            <td>-----</td>
+			<td>médecin </td>
+			<td>hjkhgjh</td>
+			<td>
+                <a href="" class="details-btn">Modifier</a>
+                <a href="#" class="delete-btn">Supprimer</a>
+              </td>
+          </tr>
+          <tr>
+            <td>Smith785@gmail.com</td>
+            <td>-----</td>
+			<td>médecin </td>
+			<td>hjkhgjh</td>
+			<td>
+                <a href="" class="details-btn">Modifier</a>
+                <a href="#" class="delete-btn">Supprimer</a>
+              </td>
+          </tr>
+          <tr>
+            <td>Smith785@gmail.com</td>
+            <td>-----</td>
+			<td>médecin </td>
+			<td>hjkhgjh</td>
+			<td>
+                <a href="" class="details-btn">Modifier</a>
+                <a href="#" class="delete-btn">Supprimer</a>
+              </td>
+          </tr>
+          <tr>
+            <td>Smith785@gmail.com</td>
+            <td>-----</td>
+			<td>médecin </td>
+			<td>hjkhgjh</td>
+			<td>
+                <a href="" class="details-btn">Modifier</a>
+                <a href="#" class="delete-btn">Supprimer</a>
+              </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Modifier l'ordonnance</h2>
+        <form>
+          <label for="nom">Email :</label>
+          <input type="text" id="nom" name="nom" required>
+
+          <label for="prenom">Fonction :</label>
+          <input type="text" id="prenom" name="prenom" required>
+
+          <label for="medicament">spécialité :</label>
+          <input type="text" id="medicament" name="medicament" required>
+
+          <label for="dosage">Mot de passe:</label>
+          <input type="text" id="usage" name="dosage" required>
+
+          
+          <button type="submit" id="save-btn">Sauvegarder</button>
+        </form>
+      </div>
+    </div>
+
+  <script>
+    // Sélectionner tous les boutons "Supprimer"
+const deleteBtns = document.querySelectorAll('.delete-btn');
+
+// Parcourir tous les boutons et ajouter un événement click à chacun
+deleteBtns.forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.preventDefault(); // Empêcher le comportement par défaut du lien
+    
+    // Supprimer la ligne correspondante du tableau
+    const row = e.target.parentNode.parentNode;
+    row.parentNode.removeChild(row);
+  });
+});
+
+
+
+
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.querySelectorAll(".details-btn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.forEach(function(btn) {
+  btn.addEventListener("click", function(event) {
+    event.preventDefault();
+  modal.style.display = "block";
+  // Get the values from the table and fill in the form
+  var row = event.target.closest("tr");
+  var nom = row.querySelector("tr td:first-child").textContent;
+  var prenom = row.querySelector("tr td:nth-child(2)").textContent;
+  var medicament = row.querySelector("tr td:nth-child(3)").textContent;
+  var usage = row.querySelector("tr td:nth-child(4)").textContent;
+  
+
+
+  document.getElementById("nom").value = nom;
+  document.getElementById("prenom").value = prenom;
+  document.getElementById("medicament").value = medicament;
+  document.getElementById("usage").value = usage;
+ 
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display= "none";
+}
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+if (event.target == modal) {
+modal.style.display = "none";
+}
+}
+});
+});
+// Save button action
+document.getElementById("save-btn").onclick = function() {
+// Get the updated values from the form
+var updatedNom = document.getElementById("nom").value;
+var updatedPrenom = document.getElementById("prenom").value;
+var updatedMedicament = document.getElementById("medicament").value;
+var updatedUsage = document.getElementById("usage").value;
+
+
+// Update the table with the new values
+var row = modal.previousElementSibling;
+row.querySelector("tr td:first-child").textContent = updatedNom;
+row.querySelector("tr td:nth-child(2)").textContent = updatedPrenom;
+row.querySelector("tr td:nth-child(3)").textContent = updatedMedicament;
+row.querySelector("tr td:nth-child(4)").textContent = updatedUsage;
+
+// Close the modal
+modal.style.display = "none";
+}
+
+  </script>
+  </body>
+</html>

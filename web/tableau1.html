@@ -1,0 +1,173 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Tableau de bord</title>
+    <style>
+      .vitals {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.vital {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+  width: calc(33.33% - 20px);
+  min-width: 200px;
+  height: 150px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+}
+
+.vital .label {
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.vital .value {
+  margin-top: 20px;
+  font-size: 48px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.vital .unit {
+  margin-top: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+
+    </style>
+  </head>
+  <body>
+    <div class="vitals">
+      <div class="vital">
+        <div class="label">Pression artérielle systolique</div>
+        <div class="value sbp"><span id="pression_systolique"></span></div>
+        <div class="unit">mmHg</div>
+      </div>
+      <div class="vital">
+        <div class="label">Pression artérielle diastolique</div>
+        <div class="value dbp"><span id="pression_diastolique"></div>
+        <div class="unit">mmHg</div>
+      </div>
+      <div class="vital">
+        <div class="label">Fréquence cardiaque</div>
+        <div class="value heartrate"><span id="frequence_cardiaque"></div>
+        <div class="unit">bpm</div>
+      </div>
+      <div class="vital">
+        <div class="label">Fréquence respiratoire</div>
+        <div class="value respiration"><span id="frequence_respiratoire"></div>
+        <div class="unit">rpm</div>
+      </div>
+      <div class="vital">
+        <div class="label">Saturation en oxygène</div>
+        <div class="value spo2"><span id="saturation_oxygene"></div>
+        <div class="unit">%</div>
+      </div>
+      <div class="vital">
+        <div class="label">Température corporelle</div>
+        <div class="value temp"> <span id="temperature"></span></div>
+        <div class="unit">°C</div>
+      </div>
+      <div class="vital">
+        <div class="label">Fraction inspirée d'oxygène</div>
+        <div class="value fio2"><span id="fraction_inspiré"></div>
+        <div class="unit">%</div>
+      </div>
+    </div>
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
+ import { getDatabase, ref, push ,onValue} from "https://www.gstatic.com/firebasejs/9.19.1/firebase-database.js";
+
+ // Configuration de Firebase
+const firebaseConfig = {
+apiKey: "AIzaSyCcuZSOcTjDCmM3hEVe8Kfm8aLSxZwo5Ls",
+authDomain: "test-project-47968.firebaseapp.com",
+databaseURL: "https://test-project-47968-default-rtdb.firebaseio.com",
+projectId: "test-project-47968",
+storageBucket: "test-project-47968.appspot.com",
+messagingSenderId: "1049958123318",
+appId: "1:1049958123318:web:bf0f3c7afd34f70388d597",
+measurementId: "G-1R5HRR14H6"
+};
+
+const app = initializeApp(firebaseConfig);
+ 
+ //reference your database
+ const db = getDatabase(app);
+
+
+// Référence au noeud "temperature" de la base de données
+const temperatureRef = ref(db, 'temperature');
+
+// Lecture de la valeur de la température
+onValue(temperatureRef, (snapshot) => {
+const temperature = snapshot.val();
+document.getElementById('temperature').textContent = temperature ;
+});
+
+
+
+const pressionsystoliqueRef = ref(db, 'pression_systolique');
+
+// Lecture de la valeur de la température
+onValue(pressionsystoliqueRef, (snapshot) => {
+const pression_systolique = snapshot.val();
+document.getElementById('pression_systolique').textContent = pression_systolique ;
+});
+
+
+
+const pressiondiastoliqueRef = ref(db, 'pression_diastolique');
+
+// Lecture de la valeur de la température
+onValue(pressiondiastoliqueRef, (snapshot) => {
+const pression_diastolique = snapshot.val();
+document.getElementById('pression_diastolique').textContent = pression_diastolique ;
+});
+
+
+
+const frequencecardiaqueRef = ref(db, 'frequence_cardiaque');
+
+// Lecture de la valeur de la température
+onValue(frequencecardiaqueRef, (snapshot) => {
+const frequence_cardiaque = snapshot.val();
+document.getElementById('frequence_cardiaque').textContent = frequence_cardiaque  ;
+});
+
+
+const frequencerespiratoireRef = ref(db, 'frequence_respiratoire');
+
+// Lecture de la valeur de la température
+onValue(frequencerespiratoireRef, (snapshot) => {
+const frequence_respiratoire = snapshot.val();
+document.getElementById('frequence_respiratoire').textContent = frequence_respiratoire  ;
+});
+
+
+const saturationoxygeneRef = ref(db, 'saturation_oxygene');
+
+// Lecture de la valeur de la température
+onValue(saturationoxygeneRef, (snapshot) => {
+const saturation_oxygene = snapshot.val();
+document.getElementById('saturation_oxygene').textContent =saturation_oxygene ;
+});
+
+const fractioninspiréRef = ref(db, 'fraction_inspiré');
+// Lecture de la valeur de la température
+onValue(fractioninspiréRef, (snapshot) => {
+const fraction_inspiré = snapshot.val();
+document.getElementById('fraction_inspiré').textContent =fraction_inspiré ;
+});
+</script>
+  </body>
+</html>

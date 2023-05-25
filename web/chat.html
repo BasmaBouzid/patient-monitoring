@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<title>Page de Chat Médecin</title>
+  
+    <style>
+        body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+}
+
+
+
+.container {
+	display: flex;
+	flex-direction: row;
+	height: 300px;
+    
+}
+
+.patients {
+	flex: 1;
+	background-color: #f1f1f1;
+	padding: 20px;
+    width: 30%;
+    
+}
+
+.patients h2 {
+	margin-top: 0;
+}
+
+.patients ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+.patients li {
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+	cursor: pointer;
+}
+
+.patients img {
+	height: 50px;
+    width: 50px;
+	border-radius: 50%;
+	margin-right: 10px;
+}
+
+.conversation {
+	flex: 3;
+	background-color: white;
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+    width: 70%;
+}
+
+.conversation h2 {
+	margin-top: 0;
+}
+
+.conversation ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+
+
+
+
+
+
+.form {
+display: flex;
+flex-direction: row;
+align-items: center;
+margin-top: 20px;
+}
+
+.form input[type="text"] {
+flex: 1;
+padding: 10px;
+border: none;
+border-radius: 5px;
+margin-right: 10px;
+}
+
+
+
+
+
+.chat-global {
+    width: 1200px;
+    height: 600px;
+    margin: 0 auto;
+    border-radius: 25px;
+    box-shadow: 0 30px 70px 0px rgba(0,0,0,0.2);
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    position: relative;
+    top: 0px;
+}
+
+.nav-top {
+    position: absolute;
+    background: #fff;
+    top: 0px;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(51,51,51,0.2);
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+}
+
+.location {
+    width: 100px;
+    display: flex;
+    align-items: center;
+}
+.location img {
+    width: 30px;
+    margin-left: 10px;
+}
+.location p {
+    font-size: 20px;
+    margin-left: 5px;
+}
+
+.utilisateur {
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+
+.logos-call {
+    width: 100px;
+    display: flex;
+	
+}
+.logos-call img {
+    margin-right: 20px;
+    width: 20px;
+	
+	
+	
+}
+
+
+/* **********CONVERSATION********** */
+
+.conversation {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow:hidden;
+    flex-direction: column;
+}
+.talk {
+    margin: 20px 0;
+    color: #f1f1f1;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    width: 50%;
+    
+  
+}
+.talk img {
+    width: 50px;
+    border-radius: 50%;
+    margin-bottom: auto;
+}
+
+.talk p {
+    padding: 15px;
+    line-height: 25px;
+    border-radius: 20px;
+    /* background: #000; */
+}
+.right {
+  
+	margin-left: 500px;
+}
+.right p {
+    margin-right: 10px;
+    background:#0078FF;
+    padding-left: 10px;
+    margin-left: 0px;
+}
+
+.left p {
+    margin-left: 10px;
+    background: rgb(216,216,216);
+    color: #000;
+}
+
+/* **********FORM********** */
+
+.chat-form {
+    flex-shrink: 0;
+    width: 100%;
+    height: 90px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    background: #f1f1f1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-inputs-stuffs {
+    background: #fff;
+    display: flex;
+    width: 90%;
+    height: 60px;
+    border-radius: 9999px;
+}
+
+.group-inp {
+    width: 90%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.group-inp img {
+    width: 30px;
+}
+.group-inp textarea {
+    resize: none;
+    border: none;
+    outline: none;
+    padding-left: 10px;
+    font-size: 16px;
+    width: 100%;
+    height: 40px;
+    padding-top: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.files-logo-cont {
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    padding-left: 10px;
+    display: block;
+    height: 100%;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.files-logo-cont img {
+    width: 30px;
+}
+
+.submit-msg-btn {
+    background: #fff;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    width: 70px;
+    border: none;
+    display: flex;
+    padding-right: 5px;
+    justify-content: center;
+    align-items: center;
+}
+
+.submit-msg-btn img {
+    width: 30px;
+}
+
+.add-patient-form {
+			display: flex;
+			align-items: center;
+			margin-bottom: 20px;
+		}
+		.add-patient-form input[type="text"] {
+			margin-right: 10px;
+		}
+		.add-patient-form input[type="submit"] {
+			background-color: #20034d;
+			color: white;
+			padding: 5px 10px;
+			border: none;
+			border-radius: 3px;
+			cursor: pointer;
+		}
+    </style>
+</head>
+<body>
+	<header style="background-color: #336699; margin-left:15px;width: 100%;height:70px; color: white;"> 
+		<h2 style="padding-top: 20px;"> Chat </h2>
+	</header>
+	<div class="container">
+		<div class="patients">
+			<h2>Liste des Patients</h2>
+			<ul id="patients-list">
+				<li>
+					<img src="C:\Users\elbootic.com\Documents\doctor5.jpeg" alt="Photo Patient">
+					<p>Nom Prénom</p>
+				</li>
+				<li>
+					<img src="C:\Users\elbootic.com\Documents\doctor5.jpeg" alt="Photo Patient">
+					<p>Nom Prénom</p>
+				</li>
+				<li>
+					<img src="C:\Users\elbootic.com\Documents\doctor5.jpeg" alt="Photo Patient">
+					<p>Nom Prénom</p>
+				</li>
+			</ul>
+			<form class="add-patient-form" onsubmit="addPatient(event)">
+				<input type="text" name="patient-name" placeholder="Nom Prénom" required>
+				<input type="submit" value="Ajouter">
+			</form>
+		</div>
+
+
+		<div class="chat-global">
+
+			<div class="nav-top">
+				<div class="location">
+					<a href="home.html"><img src="C:\Users\elbootic.com\Documents\download.png"></a>
+
+					<p>Back</p>
+				</div>
+		
+				<div class="utilisateur">
+					<p>John Doe</p>
+					<p>Active Now</p>
+				</div>
+		
+				<div class="logos-call">
+					<img src="C:\Users\elbootic.com\Documents\premium-phone-icon-logo-line-style-premium-phone-icon-logo-line-style-high-quality-sign-symbol-white-99416747.jpg">
+             <img src="C:\Users\elbootic.com\Documents\1200px-Video_camera_icon.svg.png">
+				</div>
+			 </div>
+		
+			 <div class="conversation">
+				<div class="talk left">
+					<img src="C:\Users\elbootic.com\Documents\doctor5.jpeg">
+					<p>Lorem ipsum dolor sit amet.</p>
+				</div>
+				<div class="talk right">
+					<p>Lorem ipsum dolor sit amet.</p>
+					<img src="C:\Users\elbootic.com\Documents\reem.jpeg">
+				</div>
+				<div class="talk left">
+					<img src="C:\Users\elbootic.com\Documents\doctor5.jpeg">
+					<p>Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.</p>
+				</div>
+				<div class="talk right">
+					<p>Lorem ipsum dolor sit amet.</p>
+					<img src="C:\Users\elbootic.com\Documents\reem.jpeg">
+				</div>
+			</div>
+		
+		
+			<form class="chat-form"   >
+		
+				<div class="container-inputs-stuffs">
+		
+					<div class="files-logo-cont">
+						<img src="C:\Users\elbootic.com\Documents\download (1).png">
+					</div>
+		
+					<div class="group-inp">
+						<textarea placeholder="Enter your message here" minlength="1" maxlength="1500"></textarea>
+						<img src="C:\Users\elbootic.com\Documents\download (2).png">
+					</div>
+		
+		
+					<button class="submit-msg-btn">
+						<img src="C:\Users\elbootic.com\Documents\download (3).png">
+					</button>
+				</div>
+		
+			</form>
+		</div>
+	</div>
+  </body>
+
+
+
+
+  <script>
+function addPatient(event) {
+					event.preventDefault();
+					const patientsList = document.getElementById("patients-list");
+					const patientNameInput = document.querySelector('input[name="patient-name"]');
+					const patientName = patientNameInput.value.trim();
+					if (patientName === "") return;
+					const patientListItem = document.createElement("li");
+					const patientPhoto = document.createElement("img");
+					patientPhoto.src = "https://picsum.photos/30";
+					patientPhoto.alt = "Photo Patient";
+					const patientNameText = document.createElement("p");/*p:paragraphe*/
+					patientNameText.innerText = patientName;
+					patientListItem.appendChild(patientPhoto);
+					patientListItem.appendChild(patientNameText);
+					patientsList.appendChild(patientListItem);
+					patientNameInput.value = "";
+				}
+
+
+
+                const chatForm = document.querySelector('.chat-form');
+const conversation = document.querySelector('.conversation');
+
+chatForm.addEventListener('submit', (event) => {
+  event.preventDefault();/*"event.preventDefault()" est utilisé pour empêcher la soumission du formulaire et pour permettre une autre action personnalisée de se produire.*/
+  
+  const messageInput = chatForm.querySelector('textarea');
+  const messageText = messageInput.value;
+
+  if (messageText.trim() !== '') {  /*trim()" est utilisée pour supprimer les espaces blancs (y compris les espaces, les tabulations et les sauts de ligne) au début et à la fin d'une chaîne de caractères*/
+    const newMessage = document.createElement('div');
+    newMessage.classList.add('talk', 'right');/*.classList.add()" est utilisée pour ajouter une ou plusieurs classes CSS à un élément du DOM (Document Object Model). Elle prend un ou plusieurs arguments représentant les noms des classes à ajouter à l'élément.*/
+    newMessage.innerHTML = `
+      <p>${messageText}</p>
+      <img src="images/reem.jpeg">
+    `;
+    conversation.appendChild(newMessage);/*appendChild(newMessage)" est utilisé pour ajouter l'élément "newMessage" en tant qu'enfant de l'élément "conversation". Cela signifie que "newMessage" sera inséré à la fin de l'élément "conversation", après tous ses autres enfants*/
+    messageInput.value = '';/*l'expression est utilisée pour effacer le contenu du champ de saisie de texte HTML représenté par la variable "messageInput". Cela signifie que lorsque l'utilisateur soumet un message, le champ de saisie est effacé pour lui permettre de saisir un nouveau message.*/
+  }
+});
+
+
+</script>
+</html>

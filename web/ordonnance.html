@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Liste des patients</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+      #ajouter-ordonnance {
+  color: #fff;
+  background-color: #0c08f7;
+  padding: 8px 16px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 16px;
+  margin-left: 500px;
+
+}
+      #ajouter-ordonnance:hover {
+  background-color: #0805be;
+  color: #fff;
+ 
+}
+
+
+.modal.show {
+  display: flex;
+}
+
+.modal.show .modal-content {
+  opacity: 1;/*"opacity: 1;" indique que l'élément en question doit être complètement opaque, c'est-à-dire que son contenu est visible à 100%*/
+  transform: translateY(0);/* indique que l'élément doit être déplacé de 0 pixels verticalement sur l'axe des Y, c'est-à-dire qu'il ne doit pas être déplacé.*/
+}
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;/*ndique que si le contenu d'un élément HTML dépasse ses limites, des barres de défilement doivent être ajoutées automatiquement pour permettre à l'utilisateur de faire défiler le contenu.*/
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+ 
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 30%;
+  height: 110%;
+}
+
+
+.close {
+  color: #ed0a0a;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: rgb(237, 7, 7);
+  text-decoration: none;
+  cursor: pointer;
+}
+    </style>
+   
+  </head>
+  <body>
+    <header style="background-color: #336699; color: white;;margin:15px; width: 100%;"> 
+      <h2>  Ordonances</h2>
+      <a href="ajout_ordonnance.html" id="ajouter-ordonnance" >Ajouter Ordonnances</a>
+    </header>
+    <div class="container">
+      <h1>Gestion des Ordonnances</h1>
+      <table>
+        <colgroup>
+            <col style="width: 10%;">
+            <col style="width: 10%;">
+            <col style="width: 15%;">
+			<col style="width: 20%;">
+			<col style="width:20%;">
+          </colgroup>
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Prénom</th>
+			<th>Médicament</th>
+			<th>usage</th>
+			<th>Observation</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Smith</td>
+            <td>John</td>
+			<td>Paracétamol </td>
+			<td>1 gramme toutes les 6 heures maximum,</td>
+            <td> </td>
+			<td>
+                <a href="" class="details-btn">Modifier</a>
+                <a href="#" class="delete-btn">Supprimer</a>
+              </td>
+          </tr>
+          <tr>
+            <td>Doe</td>
+            <td>Jane</td>
+			<td>Ibuprofène</td>
+			<td>1 gramme toutes les 6 heures maximum,</td>
+            <td> </td>
+			<td>
+
+                <a href="" class="details-btn">Modifier</a>
+                <a href="#" class="delete-btn">Supprimer</a>
+              </td>
+          </tr>
+          <tr>
+            <td>Williams</td>
+            <td>Michael</td>
+			<td>Amoxicilline </td>
+			<td>1 gramme toutes les 6 heures maximum,</td>
+            <td> </td>
+			<td>
+                <a href="" class="details-btn">Modifier</a>
+                <a href="#" class="delete-btn">Supprimer</a>
+              </td>
+          </tr>
+          <tr>
+            <td>Johnson</td>
+            <td>Sara</td>
+			<td>Omeprazole </td>
+			<td>1 gramme toutes les 6 heures maximum,</td>
+			<td> </td>
+			<td>
+                <a href="" class="details-btn">Modifier</a>
+                <a href="#" class="delete-btn">Supprimer</a>
+              </td>
+          </tr>
+          <tr>
+            <td>Lee</td>
+            <td>David</td>
+			<td>Diclofénac </td>
+			<td>1 gramme toutes les 6 heures maximum,</td>
+			<td> </td>
+			<td>
+                <a href="" class="details-btn">Modifier</a>
+                <a href="#" class="delete-btn">Supprimer</a>
+              </td>
+          </tr>
+          <tr>
+            <td>Chen</td>
+            <td>Lisa</td>
+			<td>Amlodipine </td>
+			<td>1 gramme toutes les 6 heures maximum,</td>
+			<td> </td>
+			<td>
+                <a href="" class="details-btn">Modifier</a>
+                <a href="#" class="delete-btn">Supprimer</a>
+              </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Modifier l'ordonnance</h2>
+        <form>
+          <label for="nom">Nom :</label>
+          <input type="text" id="nom" name="nom" required>
+
+          <label for="prenom">Prénom :</label>
+          <input type="text" id="prenom" name="prenom" required>
+
+          <label for="medicament">Médicament :</label>
+          <input type="text" id="medicament" name="medicament" required>
+
+          <label for="dosage">Usage :</label>
+          <input type="text" id="usage" name="dosage" required>
+
+          <label for="dosage">Observation :</label>
+          <input type="text" id="observation" name="dosage" required>
+          
+          <button type="submit" id="save-btn">Sauvegarder</button>
+        </form>
+      </div>
+    </div>
+    <script>
+      // Sélectionner tous les boutons "Supprimer"
+const deleteBtns = document.querySelectorAll('.delete-btn');
+
+// Parcourir tous les boutons et ajouter un événement click à chacun
+deleteBtns.forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.preventDefault(); // Empêcher le comportement par défaut du lien
+    
+    // Supprimer la ligne correspondante du tableau
+    const row = e.target.parentNode.parentNode;
+    row.parentNode.removeChild(row);
+  });
+});
+
+
+
+
+
+
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.querySelectorAll(".details-btn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.forEach(function(btn) {
+  btn.addEventListener("click", function(event) {
+    event.preventDefault();
+  modal.style.display = "block";
+  // Get the values from the table and fill in the form
+  var row = event.target.closest("tr");
+  var nom = row.querySelector("tr td:first-child").textContent;
+  var prenom = row.querySelector("tr td:nth-child(2)").textContent;
+  var medicament = row.querySelector("tr td:nth-child(3)").textContent;
+  var usage = row.querySelector("tr td:nth-child(4)").textContent;
+  var observation = row.querySelector("tr td:nth-child(5)").textContent;
+
+
+  document.getElementById("nom").value = nom;
+  document.getElementById("prenom").value = prenom;
+  document.getElementById("medicament").value = medicament;
+  document.getElementById("usage").value = usage;
+  document.getElementById("observation").value = observation;
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display= "none";
+}
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+if (event.target == modal) {
+modal.style.display = "none";
+}
+}
+});
+});
+// Save button action
+document.getElementById("save-btn").onclick = function() {
+// Get the updated values from the form
+var updatedNom = document.getElementById("nom").value;
+var updatedPrenom = document.getElementById("prenom").value;
+var updatedMedicament = document.getElementById("medicament").value;
+var updatedUsage = document.getElementById("usage").value;
+var updatedObservation = document.getElementById("observation").value;
+
+// Update the table with the new values
+var row = modal.previousElementSibling;
+row.querySelector("tr td:first-child").textContent = updatedNom;
+row.querySelector("tr td:nth-child(2)").textContent = updatedPrenom;
+row.querySelector("tr td:nth-child(3)").textContent = updatedMedicament;
+row.querySelector("tr td:nth-child(4)").textContent = updatedUsage;
+row.querySelector("tr td:nth-child(5)").textContent = updatedObservation;
+// Close the modal
+modal.style.display = "none";
+}
+
+    </script>
+  </body>
+</html>
